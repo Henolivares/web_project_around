@@ -1,0 +1,36 @@
+:root {
+  /* colors */
+  --bg-dark: #000000;
+  --bg-light: #ffffff;
+  --clr-dark: #000000;
+  --clr-light: #ffffff;
+
+  /* fonts */
+  --fs-xl: 42px;
+  --fs-l: 24px;
+  --fs-m: 18px;
+
+  --lh-xl: 1;
+  --lh-l: 1.25;
+  --lh-m: 1.22;
+
+  --fw-bold: 900;
+  --fw-medium: 500;
+  --fw-regular: 400;
+}
+
+@media (max-width: 900px) {
+  :root {
+    /* fonts */
+    --fs-xl: 32px;
+  }
+}
+
+@media (max-width: 430px) {
+  :root {
+    /* fonts */
+    --fs-xl: 22px;
+    --fs-l: 24px;
+    --fs-m: 14px;
+  }
+}

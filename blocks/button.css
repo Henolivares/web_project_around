@@ -1,0 +1,7 @@
+.button {
+  background-color: var(--bg-dark);
+  border: 1px solid var(--clr-light);
+  display: grid;
+  place-content: center;
+  display: inline-block;
+}

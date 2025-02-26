@@ -1,0 +1,12 @@
+.footer {
+  --padding-top: 67px;
+  --padding-bottom: 60px;
+
+  padding: var(--padding-top) 0 var(--padding-bottom) 0;
+}
+
+.footer__paragraph {
+  margin: 0;
+  font-size: var(--fs-m);
+  color: #545454;
+}

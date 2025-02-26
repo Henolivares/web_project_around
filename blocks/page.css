@@ -1,0 +1,8 @@
+.page {
+  width: min(880px, 100% - 38px);
+  margin: auto;
+  font-family: "Inter", sans-serif;
+  font-size: var(--fs-m);
+  line-height: var(--lh-m);
+  color: var(--clr-light);
+}

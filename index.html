@@ -17,12 +17,12 @@
         />
       </header>
       <main class="content">
-        <div class="popup popup__opened">
+        <div class="popup" id="popup">
           <div class="popup__container">
-            <button class="popup__close">
+            <button class="popup__close" id="close-button">
               <img src="./images/CloseIcon.svg" alt="Close icon" />
             </button>
-            <form action="#" class="form popup__form">
+            <form action="#" class="form popup__form" id="form">
               <p class="form__paragraph">Editar perfil</p>
               <input
                 type="text"
@@ -30,6 +30,7 @@
                 placeholder="Nombre"
                 id="name"
                 name="name"
+                value="Jacques Cousteau"
               />
               <input
                 type="text"
@@ -37,8 +38,13 @@
                 placeholder="Acerca de mi"
                 id="about"
                 name="about"
+                value="Explorador"
               />
-              <button type="submit" class="form__button form__button_disabled">
+              <button
+                type="submit"
+                class="form__button"
+                id="save-profile-button"
+              >
                 Guardar
               </button>
             </form>
@@ -51,12 +57,14 @@
             class="profile__image"
           />
           <div class="profile__inner">
-            <h1 class="profile__name">Jacques Cousteau</h1>
-            <button class="button profile__edit-button">
+            <h1 class="profile__name" id="profile-name">Jacques Cousteau</h1>
+            <button class="button profile__edit-button" id="edit-button">
               <img src="./images/editIcon.svg" alt="icono de editar" />
             </button>
           </div>
-          <p class="profile__description">Explorador</p>
+          <p class="profile__description" id="profile-description">
+            Explorador
+          </p>
           <button class="button profile__add-button">
             <img src="./images/plusIcon.svg" alt="icono de agregar mas" />
           </button>
@@ -70,11 +78,13 @@
             />
             <div class="gallery__inner">
               <h2 class="gallery__title">Valle de Yosemite</h2>
-              <img
-                src="./images/likeIcon.svg"
-                alt="icono de corazon"
-                class="gallery__icon"
-              />
+              <button class="gallery__button">
+                <img
+                  src="./images/likeIcon.svg"
+                  alt="icono de corazon"
+                  class="gallery__icon"
+                />
+              </button>
             </div>
           </article>
           <article class="gallery__card">
@@ -85,11 +95,13 @@
             />
             <div class="gallery__inner">
               <h2 class="gallery__title">Lago Louise</h2>
-              <img
-                src="./images/likeIcon.svg"
-                alt="icono de corazon"
-                class="gallery__icon"
-              />
+              <button class="gallery__button">
+                <img
+                  src="./images/likeIcon.svg"
+                  alt="icono de corazon"
+                  class="gallery__icon"
+                />
+              </button>
             </div>
           </article>
           <article class="gallery__card">
@@ -100,11 +112,13 @@
             />
             <div class="gallery__inner">
               <h2 class="gallery__title">Montañas Calvas</h2>
-              <img
-                src="./images/likeIcon.svg"
-                alt="icono de corazon"
-                class="gallery__icon"
-              />
+              <button class="gallery__button">
+                <img
+                  src="./images/likeIcon.svg"
+                  alt="icono de corazon"
+                  class="gallery__icon"
+                />
+              </button>
             </div>
           </article>
           <article class="gallery__card">
@@ -115,11 +129,13 @@
             />
             <div class="gallery__inner">
               <h2 class="gallery__title">Latemar</h2>
-              <img
-                src="./images/likeIcon.svg"
-                alt="icono de corazon"
-                class="gallery__icon"
-              />
+              <button class="gallery__button">
+                <img
+                  src="./images/likeIcon.svg"
+                  alt="icono de corazon"
+                  class="gallery__icon"
+                />
+              </button>
             </div>
           </article>
           <article class="gallery__card">
@@ -130,11 +146,13 @@
             />
             <div class="gallery__inner">
               <h2 class="gallery__title">Vanoise National park</h2>
-              <img
-                src="./images/likeIcon.svg"
-                alt="icono de corazon"
-                class="gallery__icon"
-              />
+              <button class="gallery__button">
+                <img
+                  src="./images/likeIcon.svg"
+                  alt="icono de corazon"
+                  class="gallery__icon"
+                />
+              </button>
             </div>
           </article>
           <article class="gallery__card">
@@ -145,11 +163,13 @@
             />
             <div class="gallery__inner">
               <h2 class="gallery__title">Lago di Braies</h2>
-              <img
-                src="./images/likeIcon.svg"
-                alt="icono de corazon"
-                class="gallery__icon"
-              />
+              <button class="gallery__button">
+                <img
+                  src="./images/likeIcon.svg"
+                  alt="icono de corazon"
+                  class="gallery__icon"
+                />
+              </button>
             </div>
           </article>
         </section>
@@ -158,5 +178,6 @@
         <p class="footer__paragraph">&copy; 2025 Around The U.S.</p>
       </footer>
     </div>
+    <script src="./scripts/script.js"></script>
   </body>
 </html>

@@ -23,6 +23,10 @@
   padding-bottom: 14px;
 }
 
+.form__input:focus-visible {
+  outline: none;
+  border-bottom: 1px solid rgb(0, 0, 0);
+}
 .form__input:last-of-type {
   margin-top: 30px;
 }
@@ -34,6 +38,11 @@
   border-radius: 2px;
   background-color: var(--bg-dark);
   color: var(--clr-light);
+  cursor: pointer;
+}
+
+.form__button:hover {
+  opacity: 0.8;
 }
 
 .form__button_disabled {

@@ -45,6 +45,17 @@
   font-weight: var(--fw-bold);
 }
 
+.gallery__button {
+  padding: 0;
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.gallery__button:hover {
+  opacity: 0.8;
+}
+
 @media (max-width: 430px) {
   .gallery {
     --margin-top: 36px;

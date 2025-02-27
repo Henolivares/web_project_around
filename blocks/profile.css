@@ -31,6 +31,7 @@
   margin: 0;
   font-size: var(--fs-xl);
   line-height: var(--lh-xl);
+  font-weight: var(--fw-medium);
 }
 
 .profile__edit-button {

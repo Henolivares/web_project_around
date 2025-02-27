@@ -17,6 +17,33 @@
         />
       </header>
       <main class="content">
+        <div class="popup popup__opened">
+          <div class="popup__container">
+            <button class="popup__close">
+              <img src="./images/CloseIcon.svg" alt="Close icon" />
+            </button>
+            <form action="#" class="form popup__form">
+              <p class="form__paragraph">Editar perfil</p>
+              <input
+                type="text"
+                class="form__input"
+                placeholder="Nombre"
+                id="name"
+                name="name"
+              />
+              <input
+                type="text"
+                class="form__input"
+                placeholder="Acerca de mi"
+                id="about"
+                name="about"
+              />
+              <button type="submit" class="form__button form__button_disabled">
+                Guardar
+              </button>
+            </form>
+          </div>
+        </div>
         <section class="profile">
           <img
             src="./images/profile-image.jpg"

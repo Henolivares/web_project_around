@@ -7,7 +7,7 @@
 
   /* fonts */
   --fs-xl: 42px;
-  --fs-l: 24px;
+  --fs-l: 22px;
   --fs-m: 18px;
 
   --lh-xl: 1;
@@ -30,7 +30,7 @@
   :root {
     /* fonts */
     --fs-xl: 22px;
-    --fs-l: 24px;
+    --fs-l: 20px;
     --fs-m: 14px;
   }
 }

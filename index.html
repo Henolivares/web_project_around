@@ -11,7 +11,7 @@
       name="keywords"
       content="viajes, exploración, paisajes, naturaleza, galería de imágenes"
     />
-    <meta name="auhot" content="Henry Olivares" />
+    <meta name="author" content="Henry Olivares" />
     <title>Around the US</title>
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="./pages/index.css" />
@@ -59,6 +59,38 @@
             </form>
           </div>
         </div>
+        <dialog class="dialog" id="dialog-add">
+          <button class="popup__close" id="dialog-close-button">
+            <img src="./images/CloseIcon.svg" alt="Close icon" />
+          </button>
+          <form action="#" class="form" id="form-add">
+            <p class="form__paragraph">Nuevo lugar</p>
+            <input
+              type="text"
+              class="form__input"
+              placeholder="Titulo"
+              id="title-image"
+              name="title-image"
+              value=""
+            />
+            <input
+              type="text"
+              class="form__input"
+              placeholder="Enlace a la imagen"
+              id="image-link"
+              name="image-link"
+              value=""
+            />
+            <button
+              type="submit"
+              class="form__button form__button_disabled"
+              id="add-button-form"
+              disabled
+            >
+              Guardar
+            </button>
+          </form>
+        </dialog>
         <section class="profile">
           <img
             src="./images/profile-image.jpg"
@@ -74,119 +106,38 @@
           <p class="profile__description" id="profile-description">
             Explorador
           </p>
-          <button class="button profile__add-button">
+          <button class="button profile__add-button" id="add-button">
             <img src="./images/plusIcon.svg" alt="icono de agregar mas" />
           </button>
         </section>
-        <section class="gallery">
-          <article class="gallery__card">
-            <img
-              src="./images/ValledeYosemite.jpg"
-              alt="Valle de Yosemite"
-              class="gallery__image"
-            />
-            <div class="gallery__inner">
-              <h2 class="gallery__title">Valle de Yosemite</h2>
-              <button class="gallery__button">
-                <img
-                  src="./images/likeIcon.svg"
-                  alt="icono de corazon"
-                  class="gallery__icon"
-                />
-              </button>
-            </div>
-          </article>
-          <article class="gallery__card">
-            <img
-              src="./images/LagoLouise.jpg"
-              alt="Lago Louise"
-              class="gallery__image"
-            />
-            <div class="gallery__inner">
-              <h2 class="gallery__title">Lago Louise</h2>
-              <button class="gallery__button">
-                <img
-                  src="./images/likeIcon.svg"
-                  alt="icono de corazon"
-                  class="gallery__icon"
-                />
-              </button>
-            </div>
-          </article>
-          <article class="gallery__card">
-            <img
-              src="./images/MontañasCalvas.jpg"
-              alt="Montañas Calvas"
-              class="gallery__image"
-            />
-            <div class="gallery__inner">
-              <h2 class="gallery__title">Montañas Calvas</h2>
-              <button class="gallery__button">
-                <img
-                  src="./images/likeIcon.svg"
-                  alt="icono de corazon"
-                  class="gallery__icon"
-                />
-              </button>
-            </div>
-          </article>
-          <article class="gallery__card">
-            <img
-              src="./images/Latemar.jpg"
-              alt="Latemar"
-              class="gallery__image"
-            />
-            <div class="gallery__inner">
-              <h2 class="gallery__title">Latemar</h2>
-              <button class="gallery__button">
-                <img
-                  src="./images/likeIcon.svg"
-                  alt="icono de corazon"
-                  class="gallery__icon"
-                />
-              </button>
-            </div>
-          </article>
-          <article class="gallery__card">
-            <img
-              src="./images/VanoiseNationalpark.jpg"
-              alt="Vanoise National park"
-              class="gallery__image"
-            />
-            <div class="gallery__inner">
-              <h2 class="gallery__title">Vanoise National park</h2>
-              <button class="gallery__button">
-                <img
-                  src="./images/likeIcon.svg"
-                  alt="icono de corazon"
-                  class="gallery__icon"
-                />
-              </button>
-            </div>
-          </article>
-          <article class="gallery__card">
-            <img
-              src="./images/LagodiBraies.jpg"
-              alt="Lago di Braies"
-              class="gallery__image"
-            />
-            <div class="gallery__inner">
-              <h2 class="gallery__title">Lago di Braies</h2>
-              <button class="gallery__button">
-                <img
-                  src="./images/likeIcon.svg"
-                  alt="icono de corazon"
-                  class="gallery__icon"
-                />
-              </button>
-            </div>
-          </article>
-        </section>
+        <section class="gallery" id="gallery"></section>
       </main>
       <footer class="footer">
         <p class="footer__paragraph">&copy; 2025 Around The U.S.</p>
       </footer>
     </div>
+    <template id="template-card">
+      <article class="gallery__card">
+        <button class="gallery__button gallery__button_delete" id="delete-card">
+          <img
+            src="./images/trashIcon.svg"
+            alt="delete icon"
+            class="gallery__icon"
+          />
+        </button>
+        <img src="" alt="" class="gallery__image" />
+        <div class="gallery__inner">
+          <h2 class="gallery__title"></h2>
+          <button class="gallery__button">
+            <img
+              src="./images/likeIcon.svg"
+              alt="icono de corazón"
+              class="gallery__icon"
+            />
+          </button>
+        </div>
+      </article>
+    </template>
     <script src="./scripts/index.js"></script>
   </body>
 </html>

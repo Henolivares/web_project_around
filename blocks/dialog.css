@@ -1,0 +1,10 @@
+.dialog {
+  width: min(430px, 100% - 38px);
+  border: 0;
+  border-radius: 10px;
+  overflow: visible;
+}
+
+.dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.8);
+}

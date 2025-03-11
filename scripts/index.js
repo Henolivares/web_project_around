@@ -1,3 +1,71 @@
+const initialCards = [
+  {
+    name: "Valle de Yosemite",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/yosemite.jpg",
+  },
+  {
+    name: "Lago Louise",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lake-louise.jpg",
+  },
+  {
+    name: "Montañas Calvas",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/bald-mountains.jpg",
+  },
+  {
+    name: "Latemar",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/latemar.jpg",
+  },
+  {
+    name: "Parque Nacional de la Vanoise",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/vanoise.jpg",
+  },
+  {
+    name: "Lago di Braies",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lago.jpg",
+  },
+];
+
+const galleryContainer = document.querySelector("#gallery");
+const templateCard = document.querySelector("#template-card").content;
+
+const createCard = (titleImage, imageLink) => {
+  const card = templateCard.querySelector(".gallery__card").cloneNode(true);
+  const cardImage = card.querySelector(".gallery__image");
+  const cardTitle = card.querySelector(".gallery__title");
+
+  cardImage.setAttribute("src", imageLink);
+  cardImage.setAttribute("alt", titleImage);
+  cardTitle.textContent = titleImage;
+
+  return card;
+};
+
+const RenderInitialCards = () => {
+  initialCards.forEach(({ name, link }) => {
+    galleryContainer.append(createCard(name, link));
+  });
+};
+
+RenderInitialCards();
+
+// Delete card
+
+const deleteCard = (e) => {
+  const card = e.target.closest(".gallery__card");
+  card.remove();
+};
+
+const AllInitialCards = document.querySelectorAll(".gallery__button_delete");
+const arrayInitialCards = Array.from(AllInitialCards);
+arrayInitialCards.forEach((element) => {
+  element.addEventListener("click", deleteCard);
+});
+
+const addCard = (card) => {
+  galleryContainer.prepend(card);
+};
+
+// Edit profile
 const editButton = document.querySelector("#edit-button");
 const popup = document.querySelector("#popup");
 const profileName = document.querySelector("#profile-name");
@@ -43,3 +111,54 @@ closeButton.addEventListener("click", handlePopup);
 form.addEventListener("submit", handleForm);
 nameInput.addEventListener("keyup", handleButton);
 aboutInput.addEventListener("keyup", handleButton);
+
+// Dialog add
+const dialog = document.querySelector("#dialog-add");
+const closeDialogButton = dialog.querySelector("#dialog-close-button");
+const formAdd = dialog.querySelector("#form-add");
+const addButton = document.querySelector("#add-button");
+const addButtonForm = document.querySelector("#add-button-form");
+const titleInput = formAdd.querySelector("#title-image");
+const imageLinkInput = formAdd.querySelector("#image-link");
+
+addButton.addEventListener("click", () => {
+  dialog.showModal();
+});
+
+closeDialogButton.addEventListener("click", () => {
+  dialog.close();
+});
+
+const handleAddButtonForm = () => {
+  if (titleInput.value === "" || imageLinkInput.value === "") {
+    addButtonForm.setAttribute("disabled", true);
+    addButtonForm.classList.add("form__button_disabled");
+    return;
+  } else {
+    addButtonForm.removeAttribute("disabled");
+    addButtonForm.classList.remove("form__button_disabled");
+  }
+};
+const handleFormAdd = (e) => {
+  e.preventDefault();
+
+  if (titleInput.value === "" || imageLinkInput.value === "") {
+    dialog.close();
+    return;
+  }
+
+  const card = createCard(titleInput, imageLinkInput);
+
+  card
+    .querySelector(".gallery__button_delete")
+    .addEventListener("click", deleteCard);
+
+  addCard(card);
+  titleInput.value = "";
+  imageLinkInput.value = "";
+  dialog.close();
+};
+
+formAdd.addEventListener("submit", handleFormAdd);
+titleInput.addEventListener("change", handleAddButtonForm);
+imageLinkInput.addEventListener("change", handleAddButtonForm);

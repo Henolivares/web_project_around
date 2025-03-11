@@ -13,11 +13,13 @@
   border-radius: 10px;
   overflow: hidden;
   max-height: 361px;
+  position: relative;
 }
 
 .gallery__image {
   display: block;
   max-width: 100%;
+  min-width: 100%;
   aspect-ratio: 1 / 1;
   object-fit: cover;
   object-position: center;
@@ -54,6 +56,12 @@
 
 .gallery__button:hover {
   opacity: 0.8;
+}
+
+.gallery__button_delete {
+  position: absolute;
+  top: 4%;
+  right: 4%;
 }
 
 @media (max-width: 430px) {

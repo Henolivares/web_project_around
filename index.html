@@ -60,7 +60,7 @@
           </div>
         </div>
         <dialog class="dialog" id="dialog-add">
-          <button class="popup__close" id="dialog-close-button">
+          <button class="dialog__close">
             <img src="./images/CloseIcon.svg" alt="Close icon" />
           </button>
           <form action="#" class="form" id="form-add">
@@ -87,9 +87,16 @@
               id="add-button-form"
               disabled
             >
-              Guardar
+              Crear
             </button>
           </form>
+        </dialog>
+        <dialog class="dialog dialog_image-container">
+          <button class="dialog__close">
+            <img src="./images/CloseIcon.svg" alt="Close icon" />
+          </button>
+          <img src="" alt="" class="dialog__image" />
+          <p class="dialog__paragraph"></p>
         </dialog>
         <section class="profile">
           <img
@@ -118,7 +125,7 @@
     </div>
     <template id="template-card">
       <article class="gallery__card">
-        <button class="gallery__button gallery__button_delete" id="delete-card">
+        <button class="gallery__button gallery__button_delete">
           <img
             src="./images/trashIcon.svg"
             alt="delete icon"
@@ -128,7 +135,7 @@
         <img src="" alt="" class="gallery__image" />
         <div class="gallery__inner">
           <h2 class="gallery__title"></h2>
-          <button class="gallery__button">
+          <button class="gallery__button gallery__button_like">
             <img
               src="./images/likeIcon.svg"
               alt="icono de corazón"

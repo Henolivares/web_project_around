@@ -3,6 +3,7 @@
   height: 100%;
   position: fixed;
   inset: 0;
+  z-index: 10;
   display: none;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.8);
@@ -42,17 +43,6 @@
     opacity: 0;
   }
 }
-
-/* .popup__opened .popup__container {
-  scale: 1;
-  opacity: 1;
-  transition: scale 2.5s ease, opacity 5.5s ease;
-
-  @starting-style {
-    scale: 0;
-    opacity: 0;
-  }
-} */
 
 @media (max-width: 620px) {
   .popup__close {

@@ -55,10 +55,53 @@ const deleteCard = (e) => {
   card.remove();
 };
 
-const AllInitialCards = document.querySelectorAll(".gallery__button_delete");
+// Dialog image
+const dialogImageContainer = document.querySelector(".dialog_image-container");
+const dialogImage = dialogImageContainer.querySelector(".dialog__image");
+const dialogParagraph =
+  dialogImageContainer.querySelector(".dialog__paragraph");
+const dialogCloseButton = dialogImageContainer.querySelector(".dialog__close");
+
+const closeDialogImage = () => {
+  dialogImageContainer.close();
+};
+
+dialogCloseButton.addEventListener("click", closeDialogImage);
+
+const handleDialogImage = (e) => {
+  const card = e.target.closest(".gallery__card");
+
+  const image = card.querySelector(".gallery__image");
+  const title = card.querySelector(".gallery__title");
+
+  dialogImage.setAttribute("src", image.getAttribute("src"));
+  dialogImage.setAttribute("alt", title.textContent);
+  dialogParagraph.textContent = title.textContent;
+
+  dialogImageContainer.showModal();
+};
+
+// Like button
+const handleLike = (e) => {
+  if (e.target.getAttribute("src") === "./images/likeIcon.svg") {
+    e.target.setAttribute("src", "./images/likedIcon.svg");
+  } else {
+    e.target.setAttribute("src", "./images/likeIcon.svg");
+  }
+};
+
+const AllInitialCards = document.querySelectorAll(".gallery__card");
 const arrayInitialCards = Array.from(AllInitialCards);
-arrayInitialCards.forEach((element) => {
-  element.addEventListener("click", deleteCard);
+arrayInitialCards.forEach((card) => {
+  card
+    .querySelector(".gallery__button_delete")
+    .addEventListener("click", deleteCard);
+  card
+    .querySelector(".gallery__image")
+    .addEventListener("click", handleDialogImage);
+  card
+    .querySelector(".gallery__button_like")
+    .addEventListener("click", handleLike);
 });
 
 const addCard = (card) => {
@@ -114,7 +157,7 @@ aboutInput.addEventListener("keyup", handleButton);
 
 // Dialog add
 const dialog = document.querySelector("#dialog-add");
-const closeDialogButton = dialog.querySelector("#dialog-close-button");
+const closeDialogButton = dialog.querySelector(".dialog__close");
 const formAdd = dialog.querySelector("#form-add");
 const addButton = document.querySelector("#add-button");
 const addButtonForm = document.querySelector("#add-button-form");
@@ -147,12 +190,19 @@ const handleFormAdd = (e) => {
     return;
   }
 
-  const card = createCard(titleInput, imageLinkInput);
+  const card = createCard(titleInput.value, imageLinkInput.value);
 
   card
     .querySelector(".gallery__button_delete")
     .addEventListener("click", deleteCard);
 
+  card
+    .querySelector(".gallery__image")
+    .addEventListener("click", handleDialogImage);
+
+  card
+    .querySelector(".gallery__button_like")
+    .addEventListener("click", handleLike);
   addCard(card);
   titleInput.value = "";
   imageLinkInput.value = "";

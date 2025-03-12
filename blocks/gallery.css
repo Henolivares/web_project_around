@@ -23,6 +23,7 @@
   aspect-ratio: 1 / 1;
   object-fit: cover;
   object-position: center;
+  cursor: pointer;
 }
 
 .gallery__inner {

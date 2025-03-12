@@ -3,8 +3,48 @@
   border: 0;
   border-radius: 10px;
   overflow: visible;
+  padding: 0;
+}
+
+.dialog__close {
+  border: 0;
+  background-color: transparent;
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  cursor: pointer;
 }
 
 .dialog::backdrop {
   background-color: rgba(0, 0, 0, 0.8);
+}
+
+.dialog_image-container {
+  max-width: 75vw;
+  max-height: 75vh;
+  background-color: transparent;
+  border: 0;
+}
+
+.dialog__image {
+  display: block;
+  max-width: 100%;
+  min-width: 100%;
+  object-fit: cover;
+  object-position: center;
+  aspect-ratio: initial;
+}
+
+.dialog__paragraph {
+  font-size: 12px;
+  line-height: 1;
+  margin: 10px 0 0 0;
+  color: var(--clr-light);
+}
+
+@media (max-width: 620px) {
+  .dialog__close {
+    top: -50px;
+    right: 0;
+  }
 }

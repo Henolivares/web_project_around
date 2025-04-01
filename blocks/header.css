@@ -3,7 +3,6 @@
   --margin-top: 45px;
   --logo-width: 173px;
   --logo-height: 33px;
-
   margin-top: var(--margin-top);
   padding-bottom: var(--padding-bottom);
   position: relative;
@@ -29,7 +28,6 @@
   .header {
     --padding-bottom: 28px;
     --margin-top: 28px;
-
     --logo-width: 126px;
     --logo-height: 24px;
   }

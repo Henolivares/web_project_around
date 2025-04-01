@@ -64,6 +64,10 @@
   position: absolute;
   top: 4%;
   right: 4%;
+
+  img {
+    pointer-events: none;
+  }
 }
 
 @media (max-width: 430px) {

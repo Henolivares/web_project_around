@@ -1,6 +1,6 @@
-import Card from "./Card.js";
+import Card from "./card.js";
 import FormValidator from "./FormValidator.js";
-import { openDialog, closeDialog } from "./utils.js";
+import { closeDialog } from "./utils.js";
 
 // Cards
 const imageDialog = document.querySelector(".dialog_image-container");

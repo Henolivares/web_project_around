@@ -1,56 +1,14 @@
-import enableValidation from "./validate.js";
+import Card from "./card.js";
+import FormValidator from "./FormValidator.js";
+import { openDialog, closeDialog } from "./utils.js";
+
 // Cards
-const templateCard = document.querySelector("#template-card").content;
 const imageDialog = document.querySelector(".dialog_image-container");
-
-function createCard(titleImage, imageLink) {
-  const card = templateCard.querySelector(".gallery__card").cloneNode(true);
-  const cardImage = card.querySelector(".gallery__image");
-  const cardTitle = card.querySelector(".gallery__title");
-
-  cardImage.setAttribute("src", imageLink);
-  cardImage.setAttribute("alt", titleImage);
-  cardTitle.textContent = titleImage;
-
-  return card;
-}
 
 function addCard(card) {
   galleryContainer.prepend(card);
 }
 
-function handleCardFunctionality(evt) {
-  if (evt.target.classList.contains("gallery__button_delete")) {
-    deleteCard(evt);
-  } else if (evt.target.classList.contains("gallery__image")) {
-    openImageDialog(evt);
-  } else if (evt.target.classList.contains("gallery__icon")) {
-    handleLike(evt);
-  }
-}
-
-function deleteCard(evt) {
-  const card = evt.target.closest(".gallery__card");
-  card.remove();
-}
-
-function openImageDialog(evt) {
-  const img = evt.target.src;
-  const title =
-    evt.target.parentElement.querySelector(".gallery__title").textContent;
-  imageDialog.querySelector(".dialog__image").setAttribute("src", img);
-  imageDialog.querySelector(".dialog__image").setAttribute("alt", title);
-  imageDialog.querySelector(".dialog__paragraph").textContent = title;
-  imageDialog.showModal();
-}
-
-function handleLike(evt) {
-  if (evt.target.getAttribute("src") === "./images/likeIcon.svg") {
-    evt.target.setAttribute("src", "./images/likedIcon.svg");
-  } else {
-    evt.target.setAttribute("src", "./images/likeIcon.svg");
-  }
-}
 // Render initial cards
 const initialCards = [
   {
@@ -83,50 +41,12 @@ const galleryContainer = document.querySelector("#gallery");
 
 function renderInitialCards() {
   initialCards.forEach(({ name, link }) => {
-    galleryContainer.append(createCard(name, link));
+    const card = new Card(name, link, "#template-card");
+    galleryContainer.append(card.getCard());
   });
 }
 
 renderInitialCards();
-
-galleryContainer.addEventListener("click", handleCardFunctionality);
-
-// Enable dialog functionality
-const editProfileButton = document.querySelector(".profile__edit-button");
-const addNewCardButton = document.querySelector(".profile__add-button");
-
-const dialogs = document.querySelectorAll(".dialog");
-
-function openDialog(dialogElement) {
-  dialogElement.showModal();
-}
-
-function closeDialogEvent(evt, dialog) {
-  if (
-    evt.target.classList.contains("dialog") ||
-    evt.target.classList.contains("dialog__close")
-  ) {
-    dialog.close();
-  }
-}
-
-function closeDialog(evt) {
-  evt.target.parentElement.close();
-}
-
-function enableDialogElements() {
-  Array.from(dialogs).forEach((dialog) => {
-    if (dialog.id === "dialog-profile") {
-      editProfileButton.addEventListener("click", () => openDialog(dialog));
-    } else if (dialog.id === "dialog-add") {
-      addNewCardButton.addEventListener("click", () => openDialog(dialog));
-    }
-
-    dialog.addEventListener("click", (evt) => closeDialogEvent(evt, dialog));
-  });
-}
-
-enableDialogElements();
 
 // Handle profile form
 const profileForm = document.querySelector("#form-profile");
@@ -149,12 +69,13 @@ const newCardForm = document.querySelector("#form-add");
 function handleFormAdd(evt) {
   evt.preventDefault();
   const formData = new FormData(newCardForm);
-  const card = createCard(
+  const card = new Card(
     formData.get("title-image"),
-    formData.get("image-link")
+    formData.get("image-link"),
+    "#template-card"
   );
 
-  addCard(card);
+  addCard(card.getCard());
   newCardForm.reset();
   closeDialog(evt);
 }
@@ -162,11 +83,54 @@ function handleFormAdd(evt) {
 newCardForm.addEventListener("submit", handleFormAdd);
 
 // Enable form validation
-enableValidation({
-  formSelector: ".form",
-  inputSelector: ".form__input",
-  submitButtonSelector: ".form__button",
-  inactiveButtonClass: "form__button_disabled",
-  inputErrorClass: "form__input_type_error",
-  errorClass: "form__error_visible",
-});
+const formValidatorProfileName = new FormValidator(
+  {
+    formSelector: "#form-profile",
+    inputSelector: ".form__input",
+    submitButtonSelector: ".form__button",
+    inactiveButtonClass: "form__button_disabled",
+    inputErrorClass: "form__input_type_error",
+    errorClass: "form__error_visible",
+  },
+  profileForm.querySelector("#name")
+);
+formValidatorProfileName.enableValidation();
+
+const formValidatorProfileAbout = new FormValidator(
+  {
+    formSelector: "#form-profile",
+    inputSelector: ".form__input",
+    submitButtonSelector: ".form__button",
+    inactiveButtonClass: "form__button_disabled",
+    inputErrorClass: "form__input_type_error",
+    errorClass: "form__error_visible",
+  },
+  profileForm.querySelector("#about")
+);
+formValidatorProfileAbout.enableValidation();
+
+const formValidatorAddTitle = new FormValidator(
+  {
+    formSelector: "#form-add",
+    inputSelector: ".form__input",
+    submitButtonSelector: ".form__button",
+    inactiveButtonClass: "form__button_disabled",
+    inputErrorClass: "form__input_type_error",
+    errorClass: "form__error_visible",
+  },
+  newCardForm.querySelector("#title-image")
+);
+formValidatorAddTitle.enableValidation();
+
+const formValidatorAddLink = new FormValidator(
+  {
+    formSelector: "#form-add",
+    inputSelector: ".form__input",
+    submitButtonSelector: ".form__button",
+    inactiveButtonClass: "form__button_disabled",
+    inputErrorClass: "form__input_type_error",
+    errorClass: "form__error_visible",
+  },
+  newCardForm.querySelector("#image-link")
+);
+formValidatorAddLink.enableValidation();

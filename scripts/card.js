@@ -1,10 +1,10 @@
 export default class Card {
-  constructor(cardText, cardImage, cardTemplateSelector) {
+  constructor(cardText, cardImage, cardTemplateSelector, handleCardClick) {
     this._cardText = cardText;
     this._cardImage = cardImage;
     this._cardTemplateSelector = cardTemplateSelector;
+    this._handleCardClick = handleCardClick;
     this._card;
-    this._dialog = document.querySelector(".dialog_image-container");
   }
 
   _getTemplateCard() {
@@ -33,7 +33,7 @@ export default class Card {
     if (evt.target.classList.contains("gallery__button_delete")) {
       this._deleteCard();
     } else if (evt.target.classList.contains("gallery__image")) {
-      this._openImageDialog();
+      this._handleCardClick();
     } else if (evt.target.classList.contains("gallery__icon")) {
       this._handleLike();
     }
@@ -41,18 +41,6 @@ export default class Card {
 
   _deleteCard() {
     this._card.remove();
-  }
-
-  _openImageDialog() {
-    this._dialog
-      .querySelector(".dialog__image")
-      .setAttribute("src", this._cardImage);
-    this._dialog
-      .querySelector(".dialog__image")
-      .setAttribute("alt", this._cardText);
-    this._dialog.querySelector(".dialog__paragraph").textContent =
-      this._cardText;
-    this._dialog.showModal();
   }
 
   _handleLike() {

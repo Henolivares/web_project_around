@@ -1,13 +1,9 @@
-import Card from "./card.js";
 import FormValidator from "./FormValidator.js";
-import { closeDialog } from "./utils.js";
-
-// Cards
-const imageDialog = document.querySelector(".dialog_image-container");
-
-function addCard(card) {
-  galleryContainer.prepend(card);
-}
+import PopupWithForm from "./PopupWithForm.js";
+import PopupWithImage from "./PopupWithImage.js";
+import Section from "./Section.js";
+import UserInfo from "./UserInfo.js";
+import Card from "./card.js";
 
 // Render initial cards
 const initialCards = [
@@ -37,52 +33,83 @@ const initialCards = [
   },
 ];
 
-const galleryContainer = document.querySelector("#gallery");
-
-function renderInitialCards() {
-  initialCards.forEach(({ name, link }) => {
-    const card = new Card(name, link, "#template-card");
-    galleryContainer.append(card.getCard());
+const handleCardClick = ({ imageTitle, imageLink }) => {
+  const popup = new PopupWithImage(".dialog_image-container", {
+    imageTitle,
+    imageLink,
   });
-}
+  popup.setEventListeners();
+  popup.open();
+};
 
-renderInitialCards();
+const cardsSection = new Section(
+  {
+    items: initialCards,
+    renderer: ({ name, link }) => {
+      const card = new Card(name, link, "#template-card", () => {
+        handleCardClick({ imageTitle: name, imageLink: link });
+      });
+      cardsSection.addItem(card.getCard());
+    },
+  },
+  "#gallery"
+);
 
-// Handle profile form
-const profileForm = document.querySelector("#form-profile");
-const profileName = document.querySelector("#profile-name");
-const profileDescription = document.querySelector("#profile-description");
+cardsSection.renderItems();
 
-function handleProfileForm(evt) {
-  evt.preventDefault();
-  const formData = new FormData(profileForm);
-  profileName.textContent = formData.get("name");
-  profileDescription.textContent = formData.get("about");
-  closeDialog(evt);
-}
+// Forms opener elements
+const formProfileOpener = document.querySelector("#edit-button");
+const formNewCardOpener = document.querySelector("#add-button");
 
-profileForm.addEventListener("submit", handleProfileForm);
+// Handle forms submit events
+const profileFormPopup = new PopupWithForm(
+  "#dialog-profile",
+  ({ evt, data }) => {
+    evt.preventDefault();
+    const userInfo = new UserInfo(data);
+    userInfo.setUserInfo(userInfo.getUserInfo());
+    profileFormPopup.close();
+  }
+);
 
-// Handle add card form
-const newCardForm = document.querySelector("#form-add");
+profileFormPopup.setEventListeners();
+formProfileOpener.addEventListener("click", () => {
+  // Set input values to current user
+  const profileName = document
+    .querySelector("#profile-name")
+    .textContent.trim();
+  const profileDescription = document
+    .querySelector("#profile-description")
+    .textContent.trim();
+  const values = {
+    name: profileName,
+    about: profileDescription,
+  };
+  profileFormPopup.setFormValues(values);
+  profileFormPopup.open();
+});
 
-function handleFormAdd(evt) {
-  evt.preventDefault();
-  const formData = new FormData(newCardForm);
-  const card = new Card(
-    formData.get("title-image"),
-    formData.get("image-link"),
-    "#template-card"
-  );
+const addNewFormPopup = new PopupWithForm(
+  "#dialog-add",
+  ({ evt, data: { imageTitle, imageLink } }) => {
+    evt.preventDefault();
+    const card = new Card(imageTitle, imageLink, "#template-card", () => {
+      handleCardClick({ imageTitle, imageLink });
+    });
+    cardsSection.addItem(card.getCard());
+    addNewFormPopup.close();
+  }
+);
 
-  addCard(card.getCard());
-  newCardForm.reset();
-  closeDialog(evt);
-}
-
-newCardForm.addEventListener("submit", handleFormAdd);
+addNewFormPopup.setEventListeners();
+formNewCardOpener.addEventListener("click", () => {
+  addNewFormPopup.open();
+});
 
 // Enable form validation
+const profileForm = document.querySelector("#form-profile");
+const newCardForm = document.querySelector("#form-add");
+
 const formValidatorProfileName = new FormValidator(
   {
     formSelector: "#form-profile",
@@ -118,7 +145,7 @@ const formValidatorAddTitle = new FormValidator(
     inputErrorClass: "form__input_type_error",
     errorClass: "form__error_visible",
   },
-  newCardForm.querySelector("#title-image")
+  newCardForm.querySelector("#image-title")
 );
 formValidatorAddTitle.enableValidation();
 

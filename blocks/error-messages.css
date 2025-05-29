@@ -1,0 +1,32 @@
+.error-messages {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  padding: 10px 20px;
+  background-color: var(--clr-light);
+  border-radius: 10px;
+  transform: translateY(-120px);
+}
+
+.error-message {
+  margin: 0;
+  color: var(--clr-dark);
+}
+
+.error-messages--show {
+  animation: showMessage 4s both;
+}
+
+@keyframes showMessage {
+  10% {
+    transform: translateY(0px);
+  }
+  75% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(-120px);
+  }
+}

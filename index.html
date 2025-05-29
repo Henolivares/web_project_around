@@ -26,6 +26,9 @@
           class="header__logo"
         />
       </header>
+      <div class="error-messages">
+        <p class="error-message">Ha ocurrido un error</p>
+      </div>
       <main class="content">
         <dialog class="dialog" id="dialog-profile">
           <button class="dialog__close">
@@ -46,7 +49,7 @@
               />
               <p class="form__error"></p>
             </div>
-            <div class="form__field">
+            <div class="form__field form__field--with-margin">
               <input
                 type="text"
                 class="form__input"
@@ -76,7 +79,7 @@
                 class="form__input"
                 placeholder="Titulo"
                 id="image-title"
-                name="imageTitle"
+                name="name"
                 value=""
                 minlength="2"
                 maxlength="30"
@@ -84,13 +87,13 @@
               />
               <p class="form__error"></p>
             </div>
-            <div class="form__field">
+            <div class="form__field form__field--with-margin">
               <input
                 type="url"
                 class="form__input"
                 placeholder="Enlace a la imagen"
                 id="image-link"
-                name="imageLink"
+                name="link"
                 value=""
                 required
               />
@@ -98,6 +101,44 @@
             </div>
             <button type="submit" class="form__button" id="add-button-form">
               Crear
+            </button>
+          </form>
+        </dialog>
+        <dialog class="dialog" id="dialog-change-avatar">
+          <button class="dialog__close">
+            <img src="./images/CloseIcon.svg" alt="Close icon" />
+          </button>
+          <form action="#" class="form" id="form-change-avatar" novalidate>
+            <p class="form__paragraph">Cambiar foto de perfil</p>
+            <div class="form__field">
+              <input
+                type="url"
+                class="form__input"
+                placeholder="Enlace a la imagen"
+                id="avatar-link"
+                name="avatar"
+                value=""
+                required
+              />
+              <p class="form__error"></p>
+            </div>
+            <button type="submit" class="form__button" id="avatar-button-form">
+              Guardar
+            </button>
+          </form>
+        </dialog>
+        <dialog class="dialog" id="dialog-delete">
+          <button class="dialog__close">
+            <img src="./images/CloseIcon.svg" alt="Close icon" />
+          </button>
+          <form action="#" class="form" id="form-delete-card" novalidate>
+            <p class="form__paragraph">¿Estás seguro/a?</p>
+            <button
+              type="submit"
+              class="form__button form__button--no-margin"
+              id="delete-button-form"
+            >
+              Sí
             </button>
           </form>
         </dialog>
@@ -109,20 +150,23 @@
           <p class="dialog__paragraph"></p>
         </dialog>
         <section class="profile">
-          <img
-            src="./images/profile-image.jpg"
-            alt="Imagen de perfil"
-            class="profile__image"
-          />
+          <button class="profile__image-container" id="edit-avatar-button">
+            <img src="" alt="Imagen de perfil" class="profile__image" />
+            <span class="profile__image-span">
+              <img
+                src="./images/editIcon.svg"
+                class="profile__image-edit"
+                alt="icono de editar"
+              />
+            </span>
+          </button>
           <div class="profile__inner">
-            <h1 class="profile__name" id="profile-name">Jacques Cousteau</h1>
+            <h1 class="profile__name" id="profile-name"></h1>
             <button class="button profile__edit-button" id="edit-button">
               <img src="./images/editIcon.svg" alt="icono de editar" />
             </button>
           </div>
-          <p class="profile__description" id="profile-description">
-            Explorador
-          </p>
+          <p class="profile__description" id="profile-description"></p>
           <button class="button profile__add-button" id="add-button">
             <img src="./images/plusIcon.svg" alt="icono de agregar mas" />
           </button>

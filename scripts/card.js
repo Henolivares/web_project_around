@@ -1,9 +1,17 @@
 export default class Card {
-  constructor(cardText, cardImage, cardTemplateSelector, handleCardClick) {
-    this._cardText = cardText;
-    this._cardImage = cardImage;
+  constructor(
+    { name, link, isLiked, _id, owner },
+    cardTemplateSelector,
+    handleCardClick
+  ) {
+    this._name = name;
+    this._link = link;
+    this._isLiked = isLiked;
+    this._id = _id;
+    this._owner = owner;
     this._cardTemplateSelector = cardTemplateSelector;
     this._handleCardClick = handleCardClick;
+    this._likeIcon;
     this._card;
   }
 
@@ -15,11 +23,12 @@ export default class Card {
     const cardImage = card.querySelector(".gallery__image");
     const cardTitle = card.querySelector(".gallery__title");
 
-    cardImage.setAttribute("src", this._cardImage);
-    cardImage.setAttribute("alt", this._cardText);
-    cardTitle.textContent = this._cardText;
+    cardImage.setAttribute("src", this._link);
+    cardImage.setAttribute("alt", this._name);
+    cardTitle.textContent = this._name;
 
     this._card = card;
+    this._likeIcon = this._card.querySelector(".gallery__icon-like");
   }
 
   _addEventListener() {
@@ -31,11 +40,29 @@ export default class Card {
 
   _handleCardFunctionality(evt) {
     if (evt.target.classList.contains("gallery__button_delete")) {
-      this._deleteCard();
+      this._handleCardClick({
+        action: "delete",
+        id: this._id,
+        deleteCard: () => {
+          this._deleteCard();
+        },
+        evt,
+      });
     } else if (evt.target.classList.contains("gallery__image")) {
-      this._handleCardClick();
-    } else if (evt.target.classList.contains("gallery__icon")) {
-      this._handleLike();
+      this._handleCardClick({
+        action: "popup",
+        name: this._name,
+        link: this._link,
+      });
+    } else if (evt.target.classList.contains("gallery__icon-like")) {
+      this._handleCardClick({
+        action: "like",
+        isLiked: this._isLiked,
+        id: this._id,
+        like: (isLike) => {
+          this._likeCard(isLike);
+        },
+      });
     }
   }
 
@@ -43,18 +70,23 @@ export default class Card {
     this._card.remove();
   }
 
-  _handleLike() {
-    const likeIcon = this._card.querySelector(".gallery__icon-like");
-    if (likeIcon.getAttribute("src") === "./images/likeIcon.svg") {
-      likeIcon.setAttribute("src", "./images/likedIcon.svg");
+  _likeCard(isLike) {
+    this._isLiked = isLike;
+    this._isCardLike();
+  }
+
+  _isCardLike() {
+    if (this._isLiked) {
+      this._likeIcon.setAttribute("src", "./images/likedIcon.svg");
     } else {
-      likeIcon.setAttribute("src", "./images/likeIcon.svg");
+      this._likeIcon.setAttribute("src", "./images/likeIcon.svg");
     }
   }
 
   getCard() {
     this._getTemplateCard();
     this._addEventListener();
+    this._isCardLike();
     return this._card;
   }
 }

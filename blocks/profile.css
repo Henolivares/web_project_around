@@ -12,11 +12,48 @@
     "image . add";
 }
 
-.profile__image {
+.profile__image-container {
+  grid-area: image;
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  grid-area: image;
+  overflow: hidden;
+  border: 0px;
+  background-color: transparent;
+  padding: 0px;
+  cursor: pointer;
+  position: relative;
+}
+
+.profile__image-container:focus-visible {
+  border: 0;
+  outline: 0;
+}
+
+.profile__image {
+  object-fit: cover;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+}
+
+.profile__image-span {
+  position: absolute;
+  inset: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.8);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.profile__image-edit {
+  width: 25px;
+}
+
+.profile__image-container:hover .profile__image-span {
+  opacity: 1;
 }
 
 .profile__inner {

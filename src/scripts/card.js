@@ -77,9 +77,9 @@ export default class Card {
 
   _isCardLike() {
     if (this._isLiked) {
-      this._likeIcon.setAttribute("src", "./images/likedIcon.svg");
+      this._likeIcon.setAttribute("src", "../images/likedIcon.svg");
     } else {
-      this._likeIcon.setAttribute("src", "./images/likeIcon.svg");
+      this._likeIcon.setAttribute("src", "../images/likeIcon.svg");
     }
   }
 
